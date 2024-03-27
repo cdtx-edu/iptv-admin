@@ -1,58 +1,47 @@
-"use client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Subscribers, columns } from "./columns";
+import { DataTable } from "./data-table";
 import { FileBarChart2, MonitorDown, Users } from "lucide-react";
-import {
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-  BarChart,
-  Bar,
-  Rectangle,
-} from "recharts";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const data = [
+export const data: Subscribers[] = [
   {
-    name: "Jan",
-    products: 4000,
-    views: 2400,
+    email: "dawazak@gmail.com",
+    device: "Android",
+    date: "02/03/2024",
+    location: "Nigeria",
   },
   {
-    name: "Feb",
-    products: 3000,
-    views: 1398,
+    email: "everything@allpeople.com",
+    device: "AndroidTV",
+    date: "02/03/2024",
+    location: "Canada",
   },
   {
-    name: "Mar",
-    products: 2000,
-    views: 9800,
+    email: "todaypeople@gmail.com",
+    device: "Tizen",
+    date: "02/03/2024",
+    location: "United Kingdom",
   },
   {
-    name: "Apr",
-    products: 2780,
-    views: 3908,
+    email: "allhumans@gmail.com",
+    device: "Android",
+    date: "02/03/2024",
+    location: "France",
   },
   {
-    name: "May",
-    products: 1890,
-    views: 4800,
-  },
-  {
-    name: "Jun",
-    products: 2390,
-    views: 3800,
+    email: "wednesday@today.com",
+    device: "Web OS",
+    date: "02/03/2024",
+    location: "China",
   },
 ];
-
-export default function Home() {
+export default function SubscriptionsPage() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex items-center">
-        <h1 className="text-lg font-semibold md:text-2xl">Dashboard</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Subscriptions</h1>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Downloads</CardTitle>
@@ -91,34 +80,9 @@ export default function Home() {
         </Card>
       </div>
 
-      <ResponsiveContainer width="100%" height={350} className="bg-white">
-        <BarChart
-          data={data}
-          margin={{
-            top: 5,
-            right: 20,
-            left: 30,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-
-          <Bar
-            dataKey="products"
-            fill="#e1e1ff"
-            activeBar={<Rectangle fill="pink" stroke="blue" />}
-          />
-          <Bar
-            dataKey="views"
-            fill="#b5eeff"
-            activeBar={<Rectangle fill="gold" stroke="purple" />}
-          />
-          <Legend />
-        </BarChart>
-      </ResponsiveContainer>
+      <div className="container py-10 bg-white">
+        <DataTable columns={columns} data={data} />
+      </div>
     </div>
   );
 }
