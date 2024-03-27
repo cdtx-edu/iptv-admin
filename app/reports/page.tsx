@@ -56,12 +56,12 @@ export default function ReportsPage() {
         <h1 className="text-lg font-semibold md:text-2xl">Reports</h1>
       </div>
 
-      <div className="flex justify-between gap-4">
+      <div className="flex flex-col md:flex-row justify-between gap-4">
         <div className="container mx-auto py-10 bg-white">
           <DataTable columns={columns} data={data} />
         </div>
 
-        <Card className="w-1/2">
+        <Card className="w-full md:w-1/2">
           <CardHeader>
             <CardTitle className="text-lg text-muted-foreground font-bold capitalize">
               The feed stops working
