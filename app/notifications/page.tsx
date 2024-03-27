@@ -4,7 +4,7 @@ import { DataTable } from "./data-table";
 import { Pencil, SquarePlus } from "lucide-react";
 import Link from "next/link";
 
-export const data: Notifications[] = [
+const data: Notifications[] = [
   {
     email: "dawazak@gmail.com",
     device: "Android",

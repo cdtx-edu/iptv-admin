@@ -3,7 +3,7 @@ import { DataTable } from "./data-table";
 import { FileBarChart2, MonitorDown, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const data: Subscribers[] = [
+const data: Subscribers[] = [
   {
     email: "dawazak@gmail.com",
     device: "Android",

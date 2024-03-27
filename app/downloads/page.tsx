@@ -3,7 +3,7 @@ import { Downloads, columns } from "./columns";
 import { DataTable } from "./data-table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const data: Downloads[] = [
+const data: Downloads[] = [
   {
     email: "dawazak@gmail.com",
     device: "Android",

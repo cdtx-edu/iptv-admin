@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export const data: Reports[] = [
+const data: Reports[] = [
   {
     device: "Android TV",
     subject: "The feed stops working",
