@@ -1,97 +1,92 @@
-'use client'
-
-import { useState } from "react"
-import { Nav } from "./ui/nav"
+"use client";
 
 import {
   BadgeDollarSign,
+  Bell,
   FileBarChart2,
-  LayoutDashboard,
+  Home,
   Mail,
-  Menu,
   MonitorDown,
   Users,
+} from "lucide-react";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "@/public/logo.svg";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-} from "lucide-react"
-import { TooltipProvider } from "@radix-ui/react-tooltip"
-import { Button } from "./ui/button"
-import Link from "next/link"
-import Image from "next/image"
-import logo from '@/public/logo.svg'
-
-
-type Props = {}
+type Props = {};
+interface LinkItem {
+  title: string;
+  icon: JSX.Element;
+  path: string;
+}
 export default function Sidebar({}: Props) {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const pathname = usePathname();
+  const links: LinkItem[] = [
+    { path: "/", title: "Dashboard", icon: <Home className="h-4 w-4" /> },
+    {
+      path: "/subscriptions",
+      title: "Subscriptions",
+      icon: <Users className="h-4 w-4" />,
+    },
+    {
+      path: "/downloads",
+      title: "Downloads",
+      icon: <MonitorDown className="h-4 w-4" />,
+    },
+    {
+      path: "/notifications",
+      title: "Notifications",
+      icon: <Mail className="h-4 w-4" />,
+    },
+    {
+      path: "/pricing",
+      title: "Pricing",
+      icon: <BadgeDollarSign className="h-4 w-4" />,
+    },
+    {
+      path: "/reports",
+      title: "Reports",
+      icon: <FileBarChart2 className="h-4 w-4" />,
+    },
+  ];
 
-  function toggleSidebar(isCollapsed: boolean) {
-    setIsCollapsed(!isCollapsed)
-  }
+  const isActive = (path: string) => pathname === path;
 
   return (
-    <TooltipProvider>
-      <aside className="relative flex flex-col items-center gap-8 p-4">
-        <Link href='#' className="flex justify-start gap-2">
-          <Image src={logo}  alt="Logo" height={50} width={50}/>
-          {!isCollapsed && (
-            <div className="flex flex-col font-medium text-sm text-primary tracking-tight">
-              <span>Sparrow</span>
-              <span>Player</span>
-            </div>
-          )}
+    <div className="flex h-full max-h-screen flex-col gap-2">
+      <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+        <Link href="/" className="flex items-center gap-2 font-semibold">
+          <Image src={logo} alt="Logo" height={30} width={30} />
+          <span className="">Sparrow Player</span>
         </Link>
-        <div className="absolute  top-20">
-          <Button
-            onClick={() => toggleSidebar(isCollapsed)}
-            variant='ghost'
-            className="rounded-md p-2 h-9 w-9"
-          >
-            <Menu/>
-          </Button>
-        </div>
-        <Nav
-          isCollapsed={isCollapsed}
-          links={[
-            {
-              title: "Dashboard",
-              icon: LayoutDashboard,
-              variant: "default",
-              href: "/",
-            },
-            {
-              title: "Subscriptions",
-              icon: Users,
-              variant: "ghost",
-              href: "/subscriptions",
-            },
-            {
-              title: "Downloads",
-              icon: MonitorDown,
-              variant: "ghost",
-              href: "/downloads",
-            },
-            {
-              title: "Notifications",
-              icon: Mail,
-              variant: "ghost",
-              href: "/notifications",
-            },
-            {
-              title: "Pricing",
-              icon: BadgeDollarSign,
-              variant: "ghost",
-              href: "/pricing",
-            },
-            {
-              title: "Reports",
-              icon: FileBarChart2,
-              variant: "ghost",
-              href: "/reports",
-            },
-
-          ]}
-        />
-      </aside>
-    </TooltipProvider>
-  )
+        <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
+          <Bell className="h-4 w-4" />
+          <span className="sr-only">Toggle notifications</span>
+        </Button>
+      </div>
+      <div className="flex-1">
+        <nav className="grid items-start px-2 gap-3 text-sm font-medium lg:px-4">
+          {links.map(({ path, title, icon }, index) => (
+            <Link
+              key={index}
+              href={path}
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                {
+                  "bg-primary text-muted": isActive(path),
+                  "text-muted-foreground": !isActive(path),
+                }
+              )}
+            >
+              {icon}
+              {title}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </div>
+  );
 }
