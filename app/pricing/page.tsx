@@ -9,6 +9,7 @@ export type Device = {
   number: string;
   price: string;
 };
+
 export default function PricingPage() {
   const [devices, setDevices] = useState<Device[]>([]);
   const [newDevice, setNewDevice] = useState<Device>({ number: "", price: "" });
@@ -74,36 +75,54 @@ export default function PricingPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center">
+      {/* Header with Search Bar and Icon */}
+      <div className="flex justify-between items-center">
         <h1 className="text-lg font-semibold md:text-2xl">Pricing</h1>
-      </div>
-      <form
-        className="flex gap-4 justify-start items-end "
-        onSubmit={handleSubmit}
-      >
-        <label htmlFor="number">
-          Number of devices
+        <div className="flex items-center gap-4">
+          {/* Placeholder for Search Bar */}
           <Input
             type="text"
-            name="number"
-            placeholder="1"
-            value={newDevice.number}
-            onChange={handleInputChange}
+            placeholder="Search price"
+            className="max-w-xs"
           />
-        </label>
-        <label htmlFor="price">
-          {" "}
-          Price
+          {/* Placeholder for Icon */}
+          <div className="h-8 w-8 bg-gray-200 rounded-full flex items-center justify-center">
+            {/* Insert the actual icon here */}
+            <span className="text-gray-500">Icon</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Current Price Display */}
+      <div className="bg-pink-100 p-4 w-32 text-center rounded-lg">
+        <span className="text-2xl font-bold">$5</span>
+        <p className="text-sm text-gray-600">Current price</p>
+      </div>
+
+      {/* New Price Form */}
+      <form
+        className="space-y-4"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex flex-col space-y-2">
+          <label htmlFor="price" className="font-semibold">
+            Set new price
+          </label>
           <Input
             type="text"
             name="price"
-            placeholder="$1"
+            placeholder="Type price here"
             value={newDevice.price}
             onChange={handleInputChange}
+            className="max-w-xs"
           />
-        </label>
-        <Button>Add</Button>
+          <Button className="w-32 bg-blue-700 hover:bg-blue-800 text-white">
+            Set price
+          </Button>
+        </div>
       </form>
+
+      {/* Device List Table */}
       <div className="container mx-auto py-10 bg-white">
         <DataTable
           columns={columns}
