@@ -16,7 +16,7 @@ export default function PricingPage() {
     const price = parseFloat(newPrice);
     if (!isNaN(price)) {
       setCurrentPrice(price);
-      setNewPrice("");
+      setNewPrice(""); // Clear the input after setting the price
     } else {
       alert("Please enter a valid number.");
     }
@@ -26,9 +26,11 @@ export default function PricingPage() {
     <div className="flex justify-start items-start pl-12 space-y-8"> {/* Left-align content with padding */}
       <div className="flex flex-col space-y-8">
         {/* Current Price Display */}
-        <div className="p-4 border-2 border-gray-800 bg-rose-100 text-center rounded-lg w-fit">
-          <p className="text-2xl font-bold text-gray-800">${currentPrice}</p> {/* Updated text color */}
-          <p className="text-sm text-gray-800">Current price</p> {/* Updated text color */}
+        <div className="p-6 border-2 border-gray-800 bg-rose-100 text-center rounded-lg w-fit">
+          <p className="text-3xl font-bold text-gray-800">
+            ${currentPrice.toFixed(2)} {/* Moderately sized font */}
+          </p>
+          <p className="text-md text-gray-800">Current price</p> {/* Slightly smaller description text */}
         </div>
 
         {/* Form to Set New Price */}
@@ -36,15 +38,19 @@ export default function PricingPage() {
           <label htmlFor="new-price" className="text-md font-semibold text-gray-800">
             Set new price
           </label>
-          <Input
-            type="text"
-            id="new-price"
-            name="newPrice"
-            placeholder="Type price here"
-            value={newPrice}
-            onChange={handleInputChange}
-            className="text-center"
-          />
+          {/* Input with Dollar Symbol */}
+          <div className="flex items-center space-x-1">
+            <span className="text-gray-800">$</span>
+            <Input
+              type="text"
+              id="new-price"
+              name="newPrice"
+              placeholder="Type price here"
+              value={newPrice}
+              onChange={handleInputChange}
+              className="text-center"
+            />
+          </div>
           <Button type="submit" className="bg-gray-800 text-white">
             Set price
           </Button>
